@@ -29,7 +29,9 @@
           </div>
         </div>
 
-        <label class="control-label" for="noOfCarPark">Do you have car chargers?</label>
+        <!-- Code for Do you have a car charger -->
+
+        <label class="control-label" for="noOfCarPark">Do you have EV chargers installed?</label>
         <div class="form-group">
           <div class='col-xs-12 col-sm-6'>
             <label>
@@ -44,10 +46,35 @@
         </div>
         <div class="form-group" [hidden]="!carCharger.value">
             <label class="control-label" for="noOfCarCharger">No of EV chargers</label>
-            <input class="form-control input-md" #noOfCarCharger="ngModel" required name="noOfCarCharger"
-            type="number" placeholder="No of EV chargers" [(ngModel)]="carParkDetails.carChargerDetails.noOfCarCharger">
+            <input class="form-control input-md" #noOfCarCharger="ngModel" name="noOfCarCharger"
+            type="number" placeholder="No of EV chargers" [required]="carCharger.value" [(ngModel)]="carParkDetails.carChargerDetails.noOfCarCharger">
             <div class="alert alert-danger" [hidden]="noOfCarCharger.valid">Please enter the number of EV chargers.</div>
         </div>
+
+        <!-- Code for do you need a rof structure -->
+
+        <label class="control-label" for="noOfCarPark">Do you have alreay have a parking structure?</label>
+        <div class="form-group">
+          <div class='col-xs-12 col-sm-6'>
+            <label>
+              <input type="radio" class="iradio_buttons" #structure="ngModel" name="structure" [(ngModel)]="carParkDetails.structure"
+                [value]="true"> Yes</label>
+          </div>
+          <div class='col-xs-12 col-sm-6'>
+            <label>
+              <input type="radio" class="iradio_buttons" #structure="ngModel" name="structure" [(ngModel)]="carParkDetails.structure"
+                [value]="false"> NO </label>
+          </div>
+        </div>
+        <!-- <div class="form-group" [hidden]="!carCharger.value">
+            <label class="control-label" for="noOfCarCharger">No of EV chargers</label>
+            <input ng-required ="carCharger.value" class="form-control input-md" #noOfCarCharger="ngModel" name="noOfCarCharger"
+            type="number" placeholder="No of EV chargers" required [(ngModel)]="carParkDetails.carChargerDetails.noOfCarCharger">
+            <div class="alert alert-danger" [hidden]="noOfCarCharger.valid">Please enter the number of EV chargers.</div>
+        </div> -->
+
+
+
         <!-- <div class="form-group">
             <label class="control-label" for="companyName">Do you have existing EV chargers?</label>
             <input class="form-control input-md" tabindex="1" #companyName="ngModel" required name="companyName" type="text"

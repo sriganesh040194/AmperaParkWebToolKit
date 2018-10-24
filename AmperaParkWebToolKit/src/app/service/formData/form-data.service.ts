@@ -66,11 +66,13 @@ export class FormDataService {
   }
 
   setCarParkDetails(data: CarParkDetails) {
+    this.isCarparkDetailsFormValid = true;
     this.formData.noOfCarPark = data.noOfCarPark;
     this.formData.size = data.size;
     this.formData.structure = data.structure;
     this.formData.electricityPrice = data.electricityPrice;
     this.formData.carChargerDetails = data.carChargerDetails;
+    this.workflowService.validateStep(STEPS.carparkDetails);
   }
   //-----End -----Methods for CarPark details
 
@@ -85,9 +87,11 @@ export class FormDataService {
   }
 
   setMapDetails(data: Map) {
+    this.isMapsFormValid = true;
     this.formData.mapAddress = data.mapAddress;
     this.formData.latitude = data.latitude;
     this.formData.longitude = data.longitude;
+    this.workflowService.validateStep(STEPS.map);
   }
   //-----End -----Methods for Maps details
 }

@@ -38,7 +38,8 @@ import { WorkflowGuard } from "./service/workflow/workflow-guard.service";
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{ provide: FormDataService, useClass: FormDataService },
   { provide: IrradianceService, useClass: IrradianceService },

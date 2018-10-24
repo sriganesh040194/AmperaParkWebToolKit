@@ -6,7 +6,7 @@ export class FormData {
     noOfCarPark: number = 1;
     size: number = 2.44;
     carChargerDetails: CarCharger= {
-        noOfCarCharger: 1,
+        noOfCarCharger: 0,
         isCarChargerAvailable: false
       };
     structure: boolean = false;
@@ -49,7 +49,7 @@ export class CompanyDetails {
 //else it represents existing chargers
 export class CarCharger {
     isCarChargerAvailable: boolean = false;
-    noOfCarCharger: number = 1;
+    noOfCarCharger: number = 0;
 }
 
 export class CarParkDetails {

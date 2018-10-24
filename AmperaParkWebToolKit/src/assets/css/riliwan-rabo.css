@@ -1,11 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
 /* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
 .board{
-    width: 75%;
+    width: 100%; 
+    /* width:75%; */
     margin: 60px auto;
     height: auto;
     background: #fff;
-    /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+    box-shadow: 10px 10px #ccc,-10px 20px #ddd;
 }
 .board .nav-tabs {
     position: relative;
@@ -193,23 +194,24 @@ padding-top: 50px;
 @media( max-width : 585px ){
     
     .board {
-width: 90%;
-height:auto !important;
-}
+        /* width: 90%; */
+        width: 98%;
+        height:auto !important;
+    }
     span.round-tabs {
         font-size:16px;
-width: 50px;
-height: 50px;
-line-height: 50px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
     }
     .tab-content .head{
         font-size:20px;
-        }
+    }
     .nav-tabs > li a {
-width: 50px;
-height: 50px;
-line-height:50px;
-}
+        width: 50px;
+        height: 50px;
+        line-height:50px;
+    }
 
 .nav-tabs > li.active:after {
 content: " ";

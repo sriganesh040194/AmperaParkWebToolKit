@@ -9,7 +9,7 @@ import { IrradianceList } from './irradianceData';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AmperaParkWebToolKit';
+  title = 'AmperaPark WebTool Kit';
   hero = 'SRI';
   formData: FormDataService;
   constructor(private formDataService: FormDataService, private irradianceService: IrradianceService) { }

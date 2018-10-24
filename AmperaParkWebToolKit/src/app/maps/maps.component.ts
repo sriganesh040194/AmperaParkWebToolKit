@@ -19,7 +19,7 @@ export class MapsComponent implements OnInit {
   form: any;
   map: mapboxgl;
   geoCodingClient: mbxGeocoding;
-  searchBox:MapboxGeocoder;
+  searchBox: MapboxGeocoder;
 
   constructor(private messageService: MessageService, private formDataService: FormDataService, private router: Router) { }
 
@@ -42,7 +42,7 @@ export class MapsComponent implements OnInit {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/sriganesh040194/cjnbkcznm60dg2ss1bza4pxj0',
-      center: [this.mapDetails.longitude,this.mapDetails.latitude],
+      center: [this.mapDetails.longitude, this.mapDetails.latitude],
       zoom: 6
     });
     //Event listening to click, so that the marker can be updated.
@@ -85,47 +85,44 @@ export class MapsComponent implements OnInit {
       zoom: 14,
       placeholder: "Enter search e.g. Volkspark, Enschede"
     });
-    this.searchBox.on('result', function (e) {
+    this.searchBox.on('result', (e) => {
       marker.setLngLat(e.result.geometry.coordinates);
+      console.log(e);
+      this.updateFormAddress(e.result.place_name, e.result.geometry.coordinates)
     });
     this.map.addControl(this.searchBox);
 
   }
 
- //Method to update the address in the search box
-  updateMapAddress(lngLat: any):void {
+  //Method to update the address in the search box
+  updateMapAddress(lngLat: any): void {
     this.geoCodingClient.reverseGeocode({
       query: lngLat
     })
       .send()
-      .then(response => {
+      .then((response) => {
         // match is a GeoJSON document with geocoding matches
         const match = response.body;
         const address = match.features[0].place_name
         this.searchBox.setInput(address);
+
         //Whenever address is updated, update the FormDataSerice with teh new address.
-        var mapAddressDetails: Map = {
-          mapAddress: address,
-          latitude: lngLat[1],
-          longitude: lngLat[0],
-        }
-         this.formDataService.setMapDetails(mapAddressDetails)
-        //Update the address in the address field below the map componenet from the FormDataService
-        this.mapDetails = this.formDataService.getMapDetails();
+        this.updateFormAddress(address, lngLat);
       });
-     
   }
 
   updateFormAddress(address: string, lngLat: any) {
-    //Whenever address is updated, update the Textbox below the Map component
+    //Whenever address is updated, update the FormDataSerice with teh new address.
     var mapAddressDetails: Map = {
       mapAddress: address,
       latitude: lngLat[1],
       longitude: lngLat[0],
     }
-    console.log(lngLat);
     this.formDataService.setMapDetails(mapAddressDetails)
+    //Update the address in the address field below the map componenet from the FormDataService
+    this.mapDetails = this.formDataService.getMapDetails();
   }
+
   save(form: any): boolean {
     if (!form.valid) {
       return false;
@@ -141,5 +138,8 @@ export class MapsComponent implements OnInit {
     }
   }
 
-
+  getIrradiance():void {
+    this.http.request('http://thecatapi.com/api/images/get?format=html&results_per_page=10')
+    .subscribe(response => console.log(response.text()))
+  }
 }
