@@ -20,6 +20,7 @@ import { FormDataService } from "./service/formData/form-data.service";
 import { IrradianceService } from './irradiance.service';
 import { WorkflowService } from "./service/workflow/workflow.service";
 import { WorkflowGuard } from "./service/workflow/workflow-guard.service";
+import { ConfigService } from "./service/config/config.service";
 
 
 
@@ -44,7 +45,8 @@ import { WorkflowGuard } from "./service/workflow/workflow-guard.service";
   providers: [{ provide: FormDataService, useClass: FormDataService },
   { provide: IrradianceService, useClass: IrradianceService },
   { provide: WorkflowService, useClass: WorkflowService },
-  { provide: WorkflowGuard, useClass: WorkflowGuard }],
+  { provide: WorkflowGuard, useClass: WorkflowGuard },
+  { provide: ConfigService, useClass: ConfigService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

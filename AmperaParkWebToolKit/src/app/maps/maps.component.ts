@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from '../message.service';
 import { Map } from "../service/formData/form-data.model";
 import { FormDataService } from '../service/formData/form-data.service';
+import { ConfigService } from "../service/config/config.service";
 
 @Component({
   selector: 'app-maps',
@@ -21,19 +22,20 @@ export class MapsComponent implements OnInit {
   geoCodingClient: mbxGeocoding;
   searchBox: MapboxGeocoder;
 
-  constructor(private messageService: MessageService, private formDataService: FormDataService, private router: Router) { }
+  constructor(private messageService: MessageService, private formDataService: FormDataService, private router: Router, private configService:ConfigService) { }
 
   ngOnInit() {
+    this.configService.geIrradiance();
 
     //Get the Map Details from FormDataService
     this.mapDetails = this.formDataService.getMapDetails();
-
+    const accessTK = 'pk.eyJ1Ijoic3JpZ2FuZXNoMDQwMTk0IiwiYSI6ImNqbmExbTI2bTZ2bTQzcW54ZzZpd2hod3MifQ.HPa2Ea5OSAcHniR069Rm5w';
     //const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-    this.geoCodingClient = mbxGeocoding({ accessToken: environment.mapbox.accessToken });
+    this.geoCodingClient = mbxGeocoding({ accessToken: accessTK });
 
     //Access token for MapBox, it is stored as a environment variable
     //mapboxgl.accessToken = 'pk.eyJ1Ijoic3JpZ2FuZXNoMDQwMTk0IiwiYSI6ImNqbmExbTI2bTZ2bTQzcW54ZzZpd2hod3MifQ.HPa2Ea5OSAcHniR069Rm5w';
-    mapboxgl.accessToken = environment.mapbox.accessToken;
+    mapboxgl.accessToken = accessTK;
 
     //Default Style of MapBox
     //style: 'mapbox://styles/mapbox/streets-v10',
@@ -81,7 +83,7 @@ export class MapsComponent implements OnInit {
 
     //Search box that is used to search the address
     this.searchBox = new MapboxGeocoder({
-      accessToken: environment.mapbox.accessToken,
+      accessToken: accessTK,
       zoom: 14,
       placeholder: "Enter search e.g. Volkspark, Enschede"
     });
@@ -138,8 +140,8 @@ export class MapsComponent implements OnInit {
     }
   }
 
-  getIrradiance():void {
-    this.http.request('http://thecatapi.com/api/images/get?format=html&results_per_page=10')
-    .subscribe(response => console.log(response.text()))
-  }
+  // getIrradiance():void {
+  //   this.http.request('http://thecatapi.com/api/images/get?format=html&results_per_page=10')
+  //   .subscribe(response => console.log(response.text()))
+  // }
 }
